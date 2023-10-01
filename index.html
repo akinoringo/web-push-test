@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Push.js Test</title>
+</head>
+
+<body>
+  <div class="container">
+    <button onclick="sendNotification()" class="notify-button">通知テスト</button>
+  </div>
+
+  <script src="node_modules/push.js/bin/push.min.js"></script>
+
+  <script>
+    function sendNotification() {
+      Push.create("Hello from Push.js!", {
+        body: "This is a test notification.",
+        timeout: 4000,
+        onClick: function () {
+          window.focus();
+          this.close();
+        }
+      }).catch(function (error) {
+        console.error("Push notification error:", error);
+        alert("Push notification was declined.");
+      });;
+    }
+  </script>
+</body>
+<style>
+  .container {
+    padding: 0 20px;
+  }
+
+  .notify-button {
+    font-size: 24px;
+  }
+
+</style>
+
+</html>
